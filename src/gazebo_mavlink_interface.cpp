@@ -20,6 +20,7 @@
  */
 
 #include <gazebo_mavlink_interface.h>
+#include <iostream>
 namespace gazebo {
 GZ_REGISTER_MODEL_PLUGIN(GazeboMavlinkInterface);
 
@@ -69,6 +70,7 @@ template <typename GazeboMsgT>
 void GazeboMavlinkInterface::CreateSensorSubscription(
     void (GazeboMavlinkInterface::*fp)(const boost::shared_ptr<GazeboMsgT const>&, const int&),
     GazeboMavlinkInterface* ptr, const physics::Joint_V& joints, physics::ModelPtr& nested_model, const std::regex& model) {
+
 
   // Get nested sensors on included models
   std::string nested_sensor_name;
@@ -213,7 +215,7 @@ void GazeboMavlinkInterface::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf
   getSdfParam<std::string>(_sdf, "magSubTopic", mag_sub_topic_, mag_sub_topic_);
   getSdfParam<std::string>(_sdf, "baroSubTopic", baro_sub_topic_, baro_sub_topic_);
   getSdfParam<std::string>(_sdf, "groundtruthSubTopic", groundtruth_sub_topic_, groundtruth_sub_topic_);
-
+  std::cout << "GazeboMavlinkInterface loading \n";
   // set input_reference_ from inputs.control
   input_reference_.resize(n_out_max);
   joints_.resize(n_out_max);
@@ -549,11 +551,14 @@ void GazeboMavlinkInterface::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf
   }
 
   mavlink_interface_->Load();
+
+  std::cout << "GazeboMavlinkInterface end loading \n";
 }
 
 // This gets called by the world update start event.
 void GazeboMavlinkInterface::OnUpdate(const common::UpdateInfo&  /*_info*/) {
 
+  std::cout << "GazeboMavlinkInterface update \n";
   std::unique_lock<std::mutex> lock(last_imu_message_mutex_);
 
   if (previous_imu_seq_ > 0) {

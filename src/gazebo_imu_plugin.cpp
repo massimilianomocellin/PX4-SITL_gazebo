@@ -41,31 +41,38 @@ GazeboImuPlugin::~GazeboImuPlugin() {
 
 
 void GazeboImuPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
+
+  std::cout << "GazeboImuPlugin loading \n";
   // Store the pointer to the model
   model_ = _model;
   world_ = model_->GetWorld();
-
+  std::cout << "---1--- \n";
   // default params
   namespace_.clear();
-
+  std::cout << "---2--- \n";
   if (_sdf->HasElement("robotNamespace"))
     namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
   else
     gzerr << "[gazebo_imu_plugin] Please specify a robotNamespace.\n";
   node_handle_ = transport::NodePtr(new transport::Node());
   node_handle_->Init(namespace_);
-
-  if (_sdf->HasElement("linkName"))
+  std::cout << "---3--- \n";
+  if (_sdf->HasElement("linkName")){
     link_name_ = _sdf->GetElement("linkName")->Get<std::string>();
+    std::cout << "---3.1--- \n";
+  }
   else
     gzerr << "[gazebo_imu_plugin] Please specify a linkName.\n";
   // Get the pointer to the link
+  std::cout << "---3.2--- \n";
+  std::cout << "Nome del link Imu: " <<link_name_ <<" \n";
   link_ = model_->GetLink(link_name_);
+  std::cout << "---3.3--- \n";
   if (link_ == NULL)
     gzthrow("[gazebo_imu_plugin] Couldn't find specified link \"" << link_name_ << "\".");
-
+  std::cout << "---4--- \n";
   frame_id_ = link_name_;
-
+  std::cout << "Link_name readed \n";
   getSdfParam<std::string>(_sdf, "imuTopic", imu_topic_, kDefaultImuTopic);
   getSdfParam<double>(_sdf, "gyroscopeNoiseDensity",
                       imu_parameters_.gyroscope_noise_density,
@@ -99,15 +106,16 @@ void GazeboImuPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   #else
   last_time_ = world_->GetSimTime();
   #endif
-
+  std::cout << "GazeboImuPlugin parameters loaded \n";
   // Listen to the update event. This event is broadcast every
   // simulation iteration.
   this->updateConnection_ =
       event::Events::ConnectWorldUpdateBegin(
           boost::bind(&GazeboImuPlugin::OnUpdate, this, _1));
 
-  imu_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Imu>("~/" + model_->GetName() + imu_topic_, 10);
-
+  std::cout << "GazeboImuPlugin world update connected \n";
+  imu_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Imu>("/" + model_->GetName() + imu_topic_, 10);
+  std::cout << "GazeboImuPlugin imu node created \n";
   // Fill imu message.
   // imu_message_.header.frame_id = frame_id_; TODO Add header
   // We assume uncorrelated noise on the 3 channels -> only set diagonal
@@ -164,7 +172,7 @@ void GazeboImuPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
       break;
     }
   }
-
+  std::cout << "GazeboImuPlugin imu_message created \n";
   gravity_W_ = world_->Gravity();
   imu_parameters_.gravity_magnitude = gravity_W_.Length();
 
@@ -179,6 +187,7 @@ void GazeboImuPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
           sigma_bon_a * standard_normal_distribution_(random_generator_);
   }
 
+std::cout << "GazeboImuPlugin end loading \n";
 
 }
 
@@ -238,6 +247,8 @@ void GazeboImuPlugin::addNoise(Eigen::Vector3d* linear_acceleration,
 
 // This gets called by the world update start event.
 void GazeboImuPlugin::OnUpdate(const common::UpdateInfo& _info) {
+
+  std::cout << "GazeboImuPlugin update \n";
 #if GAZEBO_MAJOR_VERSION >= 9
   common::Time current_time  = world_->SimTime();
 #else
