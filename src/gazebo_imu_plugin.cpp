@@ -248,7 +248,7 @@ void GazeboImuPlugin::addNoise(Eigen::Vector3d* linear_acceleration,
 // This gets called by the world update start event.
 void GazeboImuPlugin::OnUpdate(const common::UpdateInfo& _info) {
 
-  std::cout << "GazeboImuPlugin update \n";
+  //std::cout << "GazeboImuPlugin update \n";
 #if GAZEBO_MAJOR_VERSION >= 9
   common::Time current_time  = world_->SimTime();
 #else

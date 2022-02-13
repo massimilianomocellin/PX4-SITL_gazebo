@@ -44,7 +44,7 @@
         <cast_shadows>1</cast_shadows>
       </visual>
     </link>
-    <link name='imu_link'>
+    <link name='/imu_link'>
       <pose>0 -0.11 0.2 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
@@ -1076,7 +1076,7 @@
     </link>
     <joint name='/imu_joint' type='revolute'>
       <parent>base_link</parent>
-      <child>imu_link</child>
+      <child>/imu_link</child>
       <pose>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>1 0 0</xyz>
@@ -1525,9 +1525,9 @@
       <baroTopic>/baro</baroTopic>
       <baroDriftPaPerSec>0</baroDriftPaPerSec>
     </plugin>
-  <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
+    <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
       <robotNamespace/>
-      <imuSubTopic>/imu_mav</imuSubTopic>
+      <imuSubTopic>/imu</imuSubTopic>
       <magSubTopic>/mag</magSubTopic>
       <baroSubTopic>/baro</baroSubTopic>
       <mavlink_addr>INADDR_ANY</mavlink_addr>
@@ -1647,8 +1647,8 @@
     <static>0</static>
     <plugin name='rotors_gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
       <robotNamespace>qav250</robotNamespace>
-      <linkName>imu_link</linkName>
-      <imuTopic>/imuqav</imuTopic>
+      <linkName>/imu_link</linkName>
+      <imuTopic>/imu</imuTopic>
       <gyroscopeNoiseDensity>0.00018665</gyroscopeNoiseDensity>
       <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
       <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
@@ -1677,8 +1677,8 @@
         </ros>
 
         <robotNamespace>odometry</robotNamespace>
-        <linkName>imu_link</linkName>
-        <imuTopic>imu</imuTopic>
+        <linkName>/imu_link</linkName>
+        <imuTopic>imuleg</imuTopic>
       </plugin>
   </model>
 </sdf>
