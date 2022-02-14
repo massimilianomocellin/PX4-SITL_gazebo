@@ -1364,7 +1364,7 @@
         </ode>
       </physics>
     </joint>
-    <joint name='zampa_2_REVOLUTE' type='revolute'>
+    <joint name='zampa_2_REVOLUTE' type='fixed'>
       <parent>base_link</parent>
       <child>zampa_2</child>
       <pose>0.02477 -0.01979 0.17996 0 -0 0</pose>
@@ -1394,7 +1394,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
     </joint>
-    <joint name='zampa_1_REVOLUTE' type='revolute'>
+    <joint name='zampa_1_REVOLUTE' type='fixed'>
       <parent>base_link</parent>
       <child>zampa_1</child>
       <pose>-0.02477 -0.01979 0.17996 0 -0 0</pose>
@@ -1646,7 +1646,7 @@
     </plugin>
     <static>0</static>
     <plugin name='rotors_gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
-      <robotNamespace>qav250</robotNamespace>
+      <robotNamespace/>
       <linkName>/imu_link</linkName>
       <imuTopic>/imu</imuTopic>
       <gyroscopeNoiseDensity>0.00018665</gyroscopeNoiseDensity>
@@ -1658,13 +1658,13 @@
       <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
       <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
     </plugin>
-    <plugin name='leg_position' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/libleg_position.so'>
+  <!--  <plugin name='leg_position' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/libleg_position.so'>
 
         <ros>
           <namespace>/leg_info</namespace>
           <remapping>joint:=joint_state</remapping>
         </ros>
-        <P>20</P>
+        <P>10</P>
         <I>5</I>
         <D>0</D>
         <left_joint>zampa_1_REVOLUTE</left_joint>
@@ -1679,6 +1679,6 @@
         <robotNamespace>odometry</robotNamespace>
         <linkName>/imu_link</linkName>
         <imuTopic>imuleg</imuTopic>
-      </plugin>
+      </plugin>-->
   </model>
 </sdf>

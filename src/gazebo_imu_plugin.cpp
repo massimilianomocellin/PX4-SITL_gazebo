@@ -114,7 +114,8 @@ void GazeboImuPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
           boost::bind(&GazeboImuPlugin::OnUpdate, this, _1));
 
   std::cout << "GazeboImuPlugin world update connected \n";
-  imu_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Imu>("/" + model_->GetName() + imu_topic_, 10);
+  std::cout << "Imu_topic_ = " << "~/" + model_->GetName() + imu_topic_ <<"\n";
+  imu_pub_ = node_handle_->Advertise<sensor_msgs::msgs::Imu>("~/" + model_->GetName() + imu_topic_, 10);
   std::cout << "GazeboImuPlugin imu node created \n";
   // Fill imu message.
   // imu_message_.header.frame_id = frame_id_; TODO Add header

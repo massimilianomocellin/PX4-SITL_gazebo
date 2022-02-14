@@ -420,6 +420,8 @@ void GazeboMavlinkInterface::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf
       boost::bind(&GazeboMavlinkInterface::onSigInt, this));
 
   // Subscribe to messages of other plugins.
+  std::cout << "Subscribing to messages \n";
+  std::cout << "Subscribing to topic: " << "~/" + model_->GetName() + imu_sub_topic_<<"\n";
   imu_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + imu_sub_topic_, &GazeboMavlinkInterface::ImuCallback, this);
   opticalFlow_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + opticalFlow_sub_topic_, &GazeboMavlinkInterface::OpticalFlowCallback, this);
   irlock_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + irlock_sub_topic_, &GazeboMavlinkInterface::IRLockCallback, this);
@@ -428,7 +430,7 @@ void GazeboMavlinkInterface::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf
   mag_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + mag_sub_topic_, &GazeboMavlinkInterface::MagnetometerCallback, this);
   baro_sub_ = node_handle_->Subscribe("~/" + model_->GetName() + baro_sub_topic_, &GazeboMavlinkInterface::BarometerCallback, this);
   wind_sub_ = node_handle_->Subscribe("~/" + wind_sub_topic_, &GazeboMavlinkInterface::WindVelocityCallback, this);
-
+  std::cout << "Subscribed to messages \n";
   // Get the model joints
   auto joints = model_->GetJoints();
 
@@ -652,7 +654,6 @@ void GazeboMavlinkInterface::setMavlinkSensorOrientation(const ignition::math::V
 void GazeboMavlinkInterface::ImuCallback(ImuPtr& imu_message)
 {
   std::unique_lock<std::mutex> lock(last_imu_message_mutex_);
-
   const int64_t diff = imu_message->seq() - last_imu_message_.seq();
   if (diff != 1 && imu_message->seq() != 0)
   {
