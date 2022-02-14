@@ -659,7 +659,7 @@ void GazeboMavlinkInterface::ImuCallback(ImuPtr& imu_message)
   {
     gzerr << "Skipped " << (diff - 1) << " IMU samples (presumably CPU usage is too high)\n";
   }
-
+  //std::cout << "Imu message: " << last_imu_message_.orientation().w() << " " <<last_imu_message_.orientation().x() << " " <<last_imu_message_.orientation().y() << " " <<last_imu_message_.orientation().z() << "\n";
   last_imu_message_ = *imu_message;
   lock.unlock();
   last_imu_message_cond_.notify_one();
