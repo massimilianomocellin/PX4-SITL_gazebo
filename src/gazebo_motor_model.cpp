@@ -21,6 +21,10 @@
 
 #include "gazebo_motor_model.h"
 #include <ignition/math.hh>
+#include <fstream>
+#include <stdio.h>
+#include <iostream>
+
 
 namespace gazebo {
 
@@ -38,6 +42,7 @@ void GazeboMotorModel::Publish() {
 }
 
 void GazeboMotorModel::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
+
   model_ = _model;
 
   namespace_.clear();
@@ -57,6 +62,11 @@ void GazeboMotorModel::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   joint_ = model_->GetJoint(joint_name_);
   if (joint_ == NULL)
     gzthrow("[gazebo_motor_model] Couldn't find specified joint \"" << joint_name_ << "\".");
+
+    ///////LOGGING//////
+    myfile.open (joint_name_+"_log.txt");
+
+
 
   // setup joint control pid to control joint
   if (_sdf->HasElement("joint_control_pid"))
@@ -277,6 +287,11 @@ void GazeboMotorModel::UpdateForcesAndMoments() {
 #else
   joint_->SetVelocity(0, turning_direction_ * ref_motor_rot_vel / rotor_velocity_slowdown_sim_);
 #endif /* if 0 */
+
+
+///////LOGGING///////
+   myfile << joint_ ->GetWorld() -> SimTime().nsec  << " " << air_drag << "\n";
+  
 }
 
 void GazeboMotorModel::UpdateMotorFail() {

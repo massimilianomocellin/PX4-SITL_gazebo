@@ -118,6 +118,8 @@ class GazeboMotorModel : public MotorModel, public ModelPlugin {
   std::string motor_speed_pub_topic_;
   std::string namespace_;
 
+  std::ofstream myfile;
+  
   int motor_number_;
   int turning_direction_;
 
