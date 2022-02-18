@@ -100,6 +100,7 @@ void MagnetometerPlugin::getSdfParams(sdf::ElementPtr sdf)
   }
 
   gt_sub_topic_ = "/groundtruth";
+
 }
 
 void MagnetometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
@@ -108,6 +109,7 @@ void MagnetometerPlugin::Load(physics::ModelPtr model, sdf::ElementPtr sdf)
 
   model_ = model;
   world_ = model_->GetWorld();
+  model_name_ = model_ ->GetName();
 #if GAZEBO_MAJOR_VERSION >= 9
   last_time_ = world_->SimTime();
   last_pub_time_ = world_->SimTime();
@@ -212,11 +214,17 @@ void MagnetometerPlugin::OnUpdate(const common::UpdateInfo&)
     mag_message_.set_time_usec(current_time.Double() * 1e6);
 
     gazebo::msgs::Vector3d* magnetic_field = new gazebo::msgs::Vector3d();
+    if (model_name_== "qav250"){
+      magnetic_field->set_x(-measured_mag[1]);
+      magnetic_field->set_y(measured_mag[0]);
+      magnetic_field->set_z(measured_mag[2]);
+    }else{
     magnetic_field->set_x(measured_mag[0]);
     magnetic_field->set_y(measured_mag[1]);
     magnetic_field->set_z(measured_mag[2]);
-    mag_message_.set_allocated_magnetic_field(magnetic_field);
+    }
 
+    mag_message_.set_allocated_magnetic_field(magnetic_field);
     last_pub_time_ = current_time;
 
     // publish mag msg
