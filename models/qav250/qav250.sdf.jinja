@@ -4,7 +4,7 @@
     <link name='base_link'>
       <pose>0 0 0.2 0 -0 0</pose>
       <inertial>
-        <pose>0 -0.009399 0.100011 0 -0 0</pose>
+        <pose>-0 -0.1 0 0 -0 0</pose>
         <mass>0.0542</mass>
         <inertia>
           <ixx>0.000184584</ixx>
@@ -201,7 +201,7 @@
       <pose>0 -0.01 0.1 0 -0 0</pose>
       <geometry>
         <box>
-          <size>0.2 0.3 0.2</size>
+          <size>0.4 0.2 0.4</size>
         </box>
       </geometry>
       <surface>
@@ -298,7 +298,7 @@
           <iyz>0</iyz>
           <izz>1e-11</izz>
         </inertia>
-        <pose>0 0 1 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 0</pose>
       <gravity>1</gravity>
@@ -1364,7 +1364,7 @@
         </ode>
       </physics>
     </joint>
-    <joint name='zampa_2_REVOLUTE' type='revolute'>
+    <joint name='zampa_2_REVOLUTE' type='fixed'>
       <parent>base_link</parent>
       <child>zampa_2</child>
       <pose>0.02477 -0.01979 0.17996 0 -0 0</pose>
@@ -1394,7 +1394,7 @@
         <provide_feedback>true</provide_feedback>
       </physics>
     </joint>
-    <joint name='zampa_1_REVOLUTE' type='revolute'>
+    <joint name='zampa_1_REVOLUTE' type='fixed'>
       <parent>base_link</parent>
       <child>zampa_1</child>
       <pose>-0.02477 -0.01979 0.17996 0 -0 0</pose>
@@ -1439,7 +1439,7 @@
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>5.84e-06</motorConstant>
+      <motorConstant>10e-06</motorConstant>
       <momentConstant>0.06</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
@@ -1456,7 +1456,7 @@
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>5.84e-06</motorConstant>
+      <motorConstant>10e-06</motorConstant>
       <momentConstant>0.06</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
@@ -1473,7 +1473,7 @@
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>5.84e-06</motorConstant>
+      <motorConstant>10e-06</motorConstant>
       <momentConstant>0.06</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>2</motorNumber>
@@ -1490,7 +1490,7 @@
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1100</maxRotVelocity>
-      <motorConstant>5.84e-06</motorConstant>
+      <motorConstant>10e-06</motorConstant>
       <momentConstant>0.06</momentConstant>
       <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
       <motorNumber>3</motorNumber>
@@ -1501,7 +1501,7 @@
     </plugin>
     <include>
       <uri>model://gps</uri>
-      <pose>0 0 0.2 0 0 0</pose>
+      <pose>0 -0.2 0.2 0 0 0</pose>
       <name>gps0</name>
     </include>
     <joint name='gps0_joint' type='fixed'>
@@ -1679,6 +1679,8 @@
         <robotNamespace>odometry</robotNamespace>
         <linkName>/imu_link</linkName>
         <imuTopic>imuleg</imuTopic>
+      </plugin>
+      <plugin name='reset' filename = 'libgazebo_reset.so'>
       </plugin>
   </model>
 </sdf>

@@ -208,6 +208,8 @@ void GazeboMotorModel::UpdateForcesAndMoments() {
     gzerr << "Aliasing on motor [" << motor_number_ << "] might occur. Consider making smaller simulation time steps or raising the rotor_velocity_slowdown_sim_ param.\n";
   }
   double real_motor_velocity = motor_rot_vel_ * rotor_velocity_slowdown_sim_;
+
+  //Forza scalare prodotta dalle eliche
   double force = real_motor_velocity * std::abs(real_motor_velocity) * motor_constant_;
   if(!reversible_) {
     // Not allowed to have negative thrust.
@@ -218,18 +220,19 @@ void GazeboMotorModel::UpdateForcesAndMoments() {
   // XXX this has to be modelled better
   //
 #if GAZEBO_MAJOR_VERSION >= 9
-  ignition::math::Vector3d body_velocity = link_->WorldLinearVel();
-  ignition::math::Vector3d joint_axis = joint_->GlobalAxis(0);
+  ignition::math::Vector3d body_velocity = link_->WorldLinearVel(); //Dà la velocità del link rispetto al sistema di riferimento assoluto
+  ignition::math::Vector3d joint_axis = joint_->GlobalAxis(0); //Dà l'asse di rotazione rispetto al sistema di riferimento assoluto
 #else
   ignition::math::Vector3d body_velocity = ignitionFromGazeboMath(link_->GetWorldLinearVel());
   ignition::math::Vector3d joint_axis = ignitionFromGazeboMath(joint_->GetGlobalAxis(0));
 #endif
 
-  ignition::math::Vector3d relative_wind_velocity = body_velocity - wind_vel_;
-  ignition::math::Vector3d velocity_parallel_to_rotor_axis = (relative_wind_velocity.Dot(joint_axis)) * joint_axis;
-  double vel = velocity_parallel_to_rotor_axis.Length();
+  ignition::math::Vector3d relative_wind_velocity = body_velocity - wind_vel_; //Vettore vento relativo all'elica
+  ignition::math::Vector3d velocity_parallel_to_rotor_axis = (relative_wind_velocity.Dot(joint_axis)) * joint_axis; //Componente del vento parallela all'asse di rotazione
+  double vel = velocity_parallel_to_rotor_axis.Length(); // Scalare della velocità del vento
+  //Crea uno scalare: 1: il rotore produce tutta la forza perchè non c'è vento, 0: non riesce più a creare forza perchè il vento è troppo forte
   double scalar = 1 - vel / 25.0; // at 25 m/s the rotor will not produce any force anymore
-  scalar = ignition::math::clamp(scalar, 0.0, 1.0);
+  scalar = ignition::math::clamp(scalar, 0.0, 1.0); //lo limita tra 0 e 1
   // Apply a force to the link.
   link_->AddRelativeForce(ignition::math::Vector3d(0, 0, force * scalar));
 
@@ -246,7 +249,7 @@ void GazeboMotorModel::UpdateForcesAndMoments() {
   physics::Link_V parent_links = link_->GetParentJointsLinks();
   // The tansformation from the parent_link to the link_.
 #if GAZEBO_MAJOR_VERSION >= 9
-  ignition::math::Pose3d pose_difference = link_->WorldCoGPose() - parent_links.at(0)->WorldCoGPose();
+  ignition::math::Pose3d pose_difference = link_->WorldCoGPose() - parent_links.at(0)->WorldCoGPose(); //Calcola il braccio
 #else
   ignition::math::Pose3d pose_difference = ignitionFromGazeboMath(link_->GetWorldCoGPose() - parent_links.at(0)->GetWorldCoGPose());
 #endif
@@ -290,8 +293,8 @@ void GazeboMotorModel::UpdateForcesAndMoments() {
 
 
 ///////LOGGING///////
-   myfile << joint_ ->GetWorld() -> SimTime().nsec  << " " << air_drag << "\n";
-  
+   myfile << joint_ -> GetWorld() -> SimTime().sec + (joint_ ->GetWorld() -> SimTime().nsec)*1e-9  << " " << air_drag << " " << force*scalar << " "<<ref_motor_rot_vel_<<"\n";
+
 }
 
 void GazeboMotorModel::UpdateMotorFail() {
