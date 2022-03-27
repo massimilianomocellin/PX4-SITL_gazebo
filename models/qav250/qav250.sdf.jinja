@@ -217,7 +217,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <iyz>0</iyz>
           <izz>2.0561e-05</izz>
         </inertia>
-        <pose>-0.025 -0.074 0.101 0 -0 0</pose>
+        <pose>-0.025 -0.125 0.101 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <visual name='visual'>
@@ -246,10 +246,9 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       </visual>
       <collision name='collision'>
         <pose>-0.028 -0.125 0.1 0 -0 0</pose>
-        <max_contacts>4</max_contacts>
         <geometry>
           <cylinder>
-            <radius>0.005</radius>
+            <radius>0.008</radius>
             <length>0.16</length>
           </cylinder>
         </geometry>
@@ -308,7 +307,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <iyz>0</iyz>
           <izz>2.0577e-05</izz>
         </inertia>
-        <pose>0.078 -0.028 0.102 0 -0 0</pose>
+        <pose>0.128 -0.028 0.102 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <visual name='visual'>
@@ -336,11 +335,10 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <cast_shadows>1</cast_shadows>
       </visual>
       <collision name='collision'>
-        <max_contacts>4</max_contacts>
         <pose>0.128 -0.035 0.1 0 -0 0</pose>
         <geometry>
           <cylinder>
-            <radius>0.005</radius>
+            <radius>0.008</radius>
             <length>0.16</length>
           </cylinder>
         </geometry>
@@ -1012,13 +1010,13 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <namespace>/leg_info</namespace>
           <remapping>joint:=joint_state</remapping>
         </ros>
-        <P>0.1</P>
-        <I>0.05</I>
+        <P>10</P>
+        <I>0.5</I>
         <D>0.0</D>
-        <iMax>4</iMax>
-        <iMin>-4</iMin>
-        <cmdMax>6</cmdMax>
-        <cmdMin>-6</cmdMin>
+        <iMax>100</iMax>
+        <iMin>-100</iMin>
+        <cmdMax>100</cmdMax>
+        <cmdMin>-100</cmdMin>
         <left_joint>zampa_1_REVOLUTE</left_joint>
         <right_joint>zampa_2_REVOLUTE</right_joint>
       </plugin>
