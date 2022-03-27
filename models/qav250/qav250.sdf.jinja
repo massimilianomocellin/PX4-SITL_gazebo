@@ -25,7 +25,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <izz>0.055225</izz>
         </inertia>
       </inertial>
-      <!--<collision name='base_link_inertia_collision'>
+    <!--  <collision name='base_link_inertia_collision'>
         <pose>0 0 -0.05 0 0 0</pose>
         <geometry>
           <box>
@@ -256,18 +256,16 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <surface>
           <friction>
             <ode>
-              <mu>2</mu>
+              <mu>1</mu>
               <mu2>1</mu2>
             </ode>
           </friction>
           <contact>
             <ode>
-              <soft_cfm>0.3</soft_cfm>
-              <soft_erp>0.5</soft_erp>
-              <kp>1e+10</kp>
-              <kd>1.5</kd>
+              <kp>1e+8</kp>
+              <kd>1</kd>
               <max_vel>0.01</max_vel>
-              <min_depth>0.002</min_depth>
+              <min_depth>0.001</min_depth>
             </ode>
           </contact>
         </surface>
@@ -279,16 +277,22 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       <pose>-0.02477 -0.01979 0.17996 0 -0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
-        <!--<limit>
-          <lower>-0.349</lower>
-          <upper>-0.34</upper>
-          <effort>100</effort>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>10</effort>
           <velocity>-1</velocity>
-          <stiffness>100000</stiffness>
-          <dissipation>1</dissipation>
-        </limit>-->
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
-
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
 
 
@@ -343,19 +347,17 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <surface>
          <friction>
             <ode>
-              <mu>2</mu>
+              <mu>1</mu>
               <mu2>1</mu2>
             </ode>
           </friction>
           <contact>
             <ode>
-              <soft_cfm>0.3</soft_cfm>
-              <soft_erp>0.5</soft_erp>
-              <kp>1e+10</kp>
-              <kd>1.5</kd>
+              <kp>1e+8</kp>
+              <kd>1</kd>
               <max_vel>0.01</max_vel>
-              <min_depth>0.002</min_depth>
-            </ode>
+              <min_depth>0.001</min_depth>
+            </ode>e>
           </contact>
         </surface>
       </collision>
@@ -366,15 +368,22 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       <pose>0.02477 -0.01979 0.17996 0 -0 0</pose>
       <axis>
         <xyz>0 0 1</xyz>
-        <!--<limit>
-          <lower>-1.047</lower>
-          <upper>-1.04</upper>
-          <effort>100</effort>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+          <effort>10</effort>
           <velocity>-1</velocity>
-          <stiffness>100000</stiffness>
-          <dissipation>1</dissipation>
-        </limit>-->
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      <!--  <use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
 
 <!-- ============== INGOMBRO BATTERIA ============= -->
@@ -488,13 +497,19 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
+          <effort>10</effort>
+          <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
+          <damping>0.005</damping>
         </dynamics>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
     <link name='rotor_1'>
       <pose> -0.176 0.094 0.22443 0 -0 0</pose>
@@ -553,13 +568,19 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
+          <effort>10</effort>
+          <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
+          <damping>0.005</damping>
         </dynamics>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
     <link name='rotor_2'>
       <pose> -0.02443 0.094 0.22443 0 -0 0</pose>
@@ -618,13 +639,19 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
+          <effort>10</effort>
+          <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
+          <damping>0.005</damping>
         </dynamics>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
     <link name='rotor_3'>
       <pose> -0.176 -0.094 0.22443 0 -0 0</pose>
@@ -683,13 +710,19 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <limit>
           <lower>-1e+16</lower>
           <upper>1e+16</upper>
+          <effort>10</effort>
+          <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
+          <damping>0.005</damping>
         </dynamics>
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
     </joint>
 
 
@@ -979,9 +1012,13 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <namespace>/leg_info</namespace>
           <remapping>joint:=joint_state</remapping>
         </ros>
-        <P>0.3</P>
-        <I>0.1</I>
-        <D>0.01</D>
+        <P>0.1</P>
+        <I>0.05</I>
+        <D>0.0</D>
+        <iMax>4</iMax>
+        <iMin>-4</iMin>
+        <cmdMax>6</cmdMax>
+        <cmdMin>-6</cmdMin>
         <left_joint>zampa_1_REVOLUTE</left_joint>
         <right_joint>zampa_2_REVOLUTE</right_joint>
       </plugin>

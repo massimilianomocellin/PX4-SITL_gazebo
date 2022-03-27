@@ -1159,6 +1159,7 @@ void GazeboMavlinkInterface::handle_control(double _dt)
           err = std::max(std::min(err, joint_max_errors_[i]), -joint_max_errors_[i]);
         }
         double force = pids_[i].Update(err, _dt);
+        std::cout << "Force: " << force << " dt: " << _dt << "\n";
         joints_[i]->SetForce(0, force);
       }
       else if (joint_control_type_[i] == "position_gztopic")
