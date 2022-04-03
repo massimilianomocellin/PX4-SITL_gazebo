@@ -224,7 +224,7 @@ void MagnetometerPlugin::OnUpdate(const common::UpdateInfo&)
     magnetic_field->set_y(measured_mag[1]);
     magnetic_field->set_z(measured_mag[2]);
     //}
-    std::cout << "Magnetometer \n";
+    
     mag_message_.set_allocated_magnetic_field(magnetic_field);
     last_pub_time_ = current_time;
 
