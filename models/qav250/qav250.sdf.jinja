@@ -1,7 +1,7 @@
 
 <!-- DO NOT EDIT: Generated from iris.sdf.jinja -->
 <sdf version='1.6'>
-  <model name='iris'>
+  <model name='qav250'>
 
 
 <!--
@@ -112,15 +112,15 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
             <resolution>0.015</resolution>
           </range>
         </ray>
-        <!--<plugin name='laser_plugin' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/liblaser_plugin.so'>
-        </plugin>-->
+        <plugin name='laser_plugin' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/liblaser_plugin.so'>
+        </plugin>
       </sensor>
     </link>
 
 
 <!-- ========= IMU LINK -->
     <link name='/imu_link'>
-      <pose>-0.05 0 0.2 0 0 0</pose>
+      <pose>-0.10 0 0.2 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.015</mass>
@@ -217,7 +217,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <iyz>0</iyz>
           <izz>2.0561e-05</izz>
         </inertia>
-        <pose>-0.025 -0.125 0.101 0 -0 0</pose>
+        <pose>-0.025 -0.074 0.101 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <visual name='visual'>
@@ -307,7 +307,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <iyz>0</iyz>
           <izz>2.0577e-05</izz>
         </inertia>
-        <pose>0.128 -0.028 0.102 0 -0 0</pose>
+        <pose>0.078 -0.028 0.102 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <visual name='visual'>
@@ -807,7 +807,12 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     </plugin>
-    <model name='gps0'>
+    <include>
+      <uri>model://gps</uri>
+      <pose>-0.10 0 0.2 0 0 0</pose>
+      <name>gps0</name>
+    </include>
+  <!--  <model name='gps0'>
       <link name='link'>
         <pose>-0.05 0 0.2 0 0 0</pose>
         <inertial>
@@ -850,7 +855,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           </plugin>
         </sensor>
       </link>
-    </model>
+    </model>-->
     <joint name='gps0_joint' type='fixed'>
       <parent>base_link</parent>
       <child>gps0::link</child>
@@ -870,7 +875,6 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       <robotNamespace/>
       <pubRate>50</pubRate>
       <baroTopic>/baro</baroTopic>
-      <baroDriftPaPerSec>0</baroDriftPaPerSec>
     </plugin>
     <plugin name='mavlink_interface' filename='libgazebo_mavlink_interface.so'>
       <robotNamespace/>
@@ -1020,7 +1024,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <left_joint>zampa_1_REVOLUTE</left_joint>
         <right_joint>zampa_2_REVOLUTE</right_joint>
       </plugin>
-      <!--<plugin name='odometry' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/libodometry.so'>
+      <plugin name='odometry' filename='/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/libodometry.so'>
 
         <ros>
           <namespace>/odometry</namespace>
@@ -1030,7 +1034,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <linkName>/imu_link</linkName>
         <imuTopic>imuleg</imuTopic>
       </plugin>
-      <plugin name='reset' filename = 'libgazebo_reset.so'>
+      <!--<plugin name='reset' filename = 'libgazebo_reset.so'>
       </plugin>-->
 
   </model>

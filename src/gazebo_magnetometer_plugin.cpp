@@ -214,16 +214,17 @@ void MagnetometerPlugin::OnUpdate(const common::UpdateInfo&)
     mag_message_.set_time_usec(current_time.Double() * 1e6);
 
     gazebo::msgs::Vector3d* magnetic_field = new gazebo::msgs::Vector3d();
-    if (model_name_== "qav250"){
+    /*if (model_name_== "qav250"){
+      std::cout << "Is qav250 \n";
       magnetic_field->set_x(-measured_mag[1]);
       magnetic_field->set_y(measured_mag[0]);
       magnetic_field->set_z(measured_mag[2]);
-    }else{
+    }else{*/
     magnetic_field->set_x(measured_mag[0]);
     magnetic_field->set_y(measured_mag[1]);
     magnetic_field->set_z(measured_mag[2]);
-    }
-
+    //}
+    std::cout << "Magnetometer \n";
     mag_message_.set_allocated_magnetic_field(magnetic_field);
     last_pub_time_ = current_time;
 

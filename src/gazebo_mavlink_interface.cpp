@@ -713,6 +713,7 @@ void GazeboMavlinkInterface::SendSensorMessages()
   mavlink_interface_->UpdateIMU(imu_data);
 
   mavlink_interface_->SendSensorMessages(time_usec);
+  //std::cout << "SendSensorMessages \n";
 }
 
 void GazeboMavlinkInterface::SendGroundTruth()
@@ -784,6 +785,7 @@ void GazeboMavlinkInterface::SendGroundTruth()
     mavlink_message_t msg;
     mavlink_msg_hil_state_quaternion_encode_chan(1, 200, MAVLINK_COMM_0, &msg, &hil_state_quat);
     mavlink_interface_->send_mavlink_message(&msg);
+    //std::cout << "send_mavlink_message \n";
   }
 }
 
