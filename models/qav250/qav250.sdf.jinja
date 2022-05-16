@@ -294,7 +294,6 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       </physics>
     </joint>
 
-
 <!-- ================== ZAMPA 2 ============== -->
     <link name='zampa_2'>
       <inertial>
@@ -440,16 +439,16 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
 <!-- =========== MECCANISMO ============== -->
 <link name='meccanismo_1'>
       <inertial>
-        <mass>0.001</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>1e-10</ixx>
+          <ixx>1e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-10</iyy>
+          <iyy>1e-05</iyy>
           <iyz>0</iyz>
-          <izz>1e-10</izz>
+          <izz>1e-05</izz>
         </inertia>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose>0.002 -0.057 0.164 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <gravity>1</gravity>
@@ -484,16 +483,16 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
     </link>
     <link name='meccanismo_2'>
       <inertial>
-        <mass>0.001</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>1e-10</ixx>
+          <ixx>1e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-10</iyy>
+          <iyy>1e-05</iyy>
           <iyz>0</iyz>
-          <izz>1e-10</izz>
+          <izz>1e-05</izz>
         </inertia>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose>0.044 -0.04 0.161 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <gravity>1</gravity>
@@ -528,16 +527,16 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
     </link>
     <link name='perno'>
       <inertial>
-        <mass>0.001</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>1e-10</ixx>
+          <ixx>1e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-10</iyy>
+          <iyy>1e-05</iyy>
           <iyz>0</iyz>
-          <izz>1e-10</izz>
+          <izz>1e-05</izz>
         </inertia>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose>0.009 -0.0515 0.156 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <gravity>1</gravity>
@@ -572,16 +571,16 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
     </link>
     <link name='servo'>
       <inertial>
-        <mass>0.001</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>1e-10</ixx>
+          <ixx>1e-05</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>1e-10</iyy>
+          <iyy>1e-05</iyy>
           <iyz>0</iyz>
-          <izz>1e-10</izz>
+          <izz>1e-05</izz>
         </inertia>
-        <pose>0 0 0 0 -0 0</pose>
+        <pose>-0.006 -0.0515 0.135 0 -0 0</pose>
       </inertial>
       <pose>0 0 0.2 1.5707 -0 -1.5707</pose>
       <gravity>1</gravity>
@@ -635,9 +634,8 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <damping>0.2</damping>
+          <damping>0.1</damping>
         </dynamics>
-        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
       <physics>
         <ode>
@@ -659,9 +657,8 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <damping>0.2</damping>
+          <damping>0.1</damping>
         </dynamics>
-        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
       <physics>
         <ode>
@@ -677,15 +674,14 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <lower>-1.79769e+308</lower>
-          <upper>1.79769e+308</upper>
+          <lower>-3.1416</lower>
+          <upper>0</upper>
           <effort>-1</effort>
           <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <damping>0.2</damping>
+          <damping>0.1</damping>
         </dynamics>
-        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
       <physics>
         <ode>
@@ -707,9 +703,8 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <damping>0.2</damping>
+          <damping>0.1</damping>
         </dynamics>
-        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
       <physics>
         <ode>
@@ -731,9 +726,8 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
           <velocity>-1</velocity>
         </limit>
         <dynamics>
-          <damping>0.2</damping>
+          <damping>0.1</damping>
         </dynamics>
-        <!--<use_parent_model_frame>1</use_parent_model_frame>-->
       </axis>
       <physics>
         <ode>
