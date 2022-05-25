@@ -291,6 +291,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -380,6 +381,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -641,6 +643,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -664,6 +667,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -687,6 +691,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -710,6 +715,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -733,6 +739,7 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <ode>
           <implicit_spring_damper>1</implicit_spring_damper>
         </ode>
+        <provide_feedback>1</provide_feedback>
       </physics>
     </joint>
 
@@ -1332,8 +1339,8 @@ CAMBIO DI COORDINATE DA CAD A GAZEBO
         <linkName>/imu_link</linkName>
         <imuTopic>imuleg</imuTopic>
       </plugin>
-      <!--<plugin name='reset' filename = 'libgazebo_reset.so'>
-      </plugin>-->
+      <plugin name='force_log' filename = '/home/massimiliano/Documenti/Tesi_magistrale/qr01_project.git/gazebo_ws/install/leg_position/lib/leg_position/libforce_log.so'>
+      </plugin>
 
   </model>
 </sdf>
